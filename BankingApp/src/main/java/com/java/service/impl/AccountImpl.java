@@ -59,6 +59,31 @@ public class AccountImpl implements AccountService{
         acc.deleteAll();
     }
 
+    @Override
+	public AccountDto withdraw(Long id, double amount) {
+		Account account = acc.findById(id).orElseThrow(()->new RuntimeException("Account doesn't Exist"));
+		if(account.getBalance()<amount) {
+			throw new RuntimeException("Insufficient amount");
+		}
+		double total = account.getBalance() - amount;
+		account.setBalance(total);
+		Account savedAccount = acc.save(account);
+		return AccountMapper.mapToAccountDTO(savedAccount);
+	}
+
+	@Override
+	public AccountDto deposit(Long id, double amount) {
+		Account account = acc.findById(id).orElseThrow(()->new RuntimeException("Account doesn't Exist"));
+//		if(account.getBalance()>amount) {
+//			throw new RuntimeException("Insufficient amount");
+//		}
+		double total = account.getBalance() + amount;
+		account.setBalance(total);
+		Account savedAccount = acc.save(account);
+		return AccountMapper.mapToAccountDTO(savedAccount);
+		return null;
+	}
+
     // @Override
     // public Account create(Account account) {
     //     return acc.save(account);
