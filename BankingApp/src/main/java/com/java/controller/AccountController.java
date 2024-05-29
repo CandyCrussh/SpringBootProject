@@ -40,18 +40,19 @@ public class AccountController {
 
     @GetMapping
     public ResponseEntity<List<AccountDto>> getAll() {
-        return new ResponseEntity<>(accountService.getAll(),HttpStatus.OK);
+        List<AccountDto> accounts = accountService.getAll();
+        return new ResponseEntity<>(accounts,HttpStatus.OK);
     }
 
     @PutMapping("/{id}/withdraw")
-    public ResponseEntity<AccountDto> withdrawamount(@PathVariable Long id, @RequestBody Map<String, Double> amount) {
+    public ResponseEntity<AccountDto> withdrawamount(@PathVariable Long id, @RequestBody Map<String, Double> request) {
     	double amount = request.get("amount");
     	AccountDto accountdto = accountService.withdraw(id, amount);
         return new ResponseEntity<>(accountdto,HttpStatus.OK);
     }
     
     @PutMapping("/{id}/deposit")
-    public ResponseEntity<AccountDto> depositamount(@PathVariable Long id, @RequestBody Map<String, Double> amount) {
+    public ResponseEntity<AccountDto> depositamount(@PathVariable Long id, @RequestBody Map<String, Double> request) {
     	double amount = request.get("amount");
     	AccountDto accountdto = accountService.deposit(id, amount);
         return new ResponseEntity<>(accountdto,HttpStatus.OK);
