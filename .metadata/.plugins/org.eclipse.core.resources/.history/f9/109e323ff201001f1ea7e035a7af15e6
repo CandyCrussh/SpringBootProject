@@ -1,5 +1,0 @@
-package com.java.repository;
-
-public interface AccountRepository extends JpaRepositoryAccount, Long<> {
-
-}
