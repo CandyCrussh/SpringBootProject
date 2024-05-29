@@ -43,19 +43,19 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAll(),HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AccountDto> withdrawamount(@PathVariable Long id, double amount) {
-        return new ResponseEntity<>(accountService.withdraw(id, amount),HttpStatus.OK);
+    @PutMapping("/{id}/withdraw")
+    public ResponseEntity<AccountDto> withdrawamount(@PathVariable Long id, @RequestBody Map<String, Double> amount) {
+    	double amount = request.get("amount");
+    	AccountDto accountdto = accountService.withdraw(id, amount);
+        return new ResponseEntity<>(accountdto,HttpStatus.OK);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<AccountDto> depositawamount(@PathVariable Long id, double amount) {
-        return new ResponseEntity<>(accountService.deposit(id, amount),HttpStatus.OK);
+    
+    @PutMapping("/{id}/deposit")
+    public ResponseEntity<AccountDto> depositamount(@PathVariable Long id, @RequestBody Map<String, Double> amount) {
+    	double amount = request.get("amount");
+    	AccountDto accountdto = accountService.deposit(id, amount);
+        return new ResponseEntity<>(accountdto,HttpStatus.OK);
     }
-
-    // @PutMapping
-    // public Account updateAccount(Account account) {
-    //     return accountService.update(account);
-    // }
 
     @DeleteMapping("/{id}")
     public void deletebyId(@PathVariable Long id) {
