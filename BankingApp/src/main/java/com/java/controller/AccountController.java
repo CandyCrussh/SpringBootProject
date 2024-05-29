@@ -43,6 +43,15 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAll(),HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountDto> withdrawamount(Long id, double amount) {
+        return new ResponseEntity<>(accountService.withdraw(id, amount),HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountDto> depositawamount(Long id, double amount) {
+        return new ResponseEntity<>(accountService.deposit(id, amount),HttpStatus.OK);
+    }
+
     // @PutMapping
     // public Account updateAccount(Account account) {
     //     return accountService.update(account);
