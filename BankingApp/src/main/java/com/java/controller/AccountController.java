@@ -44,11 +44,11 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccountDto> withdrawamount(Long id, double amount) {
+    public ResponseEntity<AccountDto> withdrawamount(@PathVariable Long id, double amount) {
         return new ResponseEntity<>(accountService.withdraw(id, amount),HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<AccountDto> depositawamount(Long id, double amount) {
+    public ResponseEntity<AccountDto> depositawamount(@PathVariable Long id, double amount) {
         return new ResponseEntity<>(accountService.deposit(id, amount),HttpStatus.OK);
     }
 
